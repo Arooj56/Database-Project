@@ -1,0 +1,9 @@
+Business Semantics:
+Entities	
+Patient			A person receiving treatment or using hospital services.
+Login			Authentication credentials used by a patient to securely access the system.
+Appointment		A scheduled meeting between a patient and a doctor.
+Previous Records	Historical medical data like Prescriptions, Checkups and Payments, viewable by the patient.
+Order Medicines		A request by the patient to purchase prescribed medicine.
+Payment			A financial transaction made by the patient for appointments or medicines.
+Payment Confirmation	Acknowledgment that a payment was successfully received and recorded in the system.

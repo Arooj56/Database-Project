@@ -1,0 +1,59 @@
+Database Schema
+CREATE TABLE Patient (
+    Patient_ID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    Contact_No VARCHAR(15),
+    Address TEXT,
+    Email VARCHAR(100)
+);
+
+CREATE TABLE Login (
+    LoginID INT PRIMARY KEY,
+    Username VARCHAR(50) UNIQUE,
+    Password VARCHAR(100),
+    Patient_ID INT UNIQUE,
+    FOREIGN KEY (Patient_ID) REFERENCES Patient(Patient_ID)
+);
+
+CREATE TABLE Appointment (
+    AP_ID INT PRIMARY KEY,
+    Date DATE,
+    Time TIME,
+    Doctor_Name VARCHAR(100),
+    Patient_ID INT,
+    FOREIGN KEY (Patient_ID) REFERENCES Patient(Patient_ID)
+);
+
+CREATE TABLE Previous_Records (
+    RecID INT PRIMARY KEY,
+    Prescriptions TEXT,
+    Checkups TEXT,
+    Payments TEXT,
+    Patient_ID INT,
+    FOREIGN KEY (Patient_ID) REFERENCES Patient(Patient_ID)
+);
+
+CREATE TABLE Medicine (
+    Medicine_Name VARCHAR(100),
+    Quantity INT,
+    Patient_ID INT,
+    PRIMARY KEY (Medicine_Name, Patient_ID),
+    FOREIGN KEY (Patient_ID) REFERENCES Patient(Patient_ID)
+);
+
+CREATE TABLE Payment (
+    Pay_ID INT PRIMARY KEY,
+    Amount DECIMAL(10, 2),
+    Method VARCHAR(50),
+    Order_Medicine_Name VARCHAR(100),
+    Patient_ID INT,
+    FOREIGN KEY (Order_Medicine_Name, Patient_ID) REFERENCES Medicine(Medicine_Name, Patient_ID)
+);
+
+CREATE TABLE Payment_Confirmation (
+    Conf_ID INT PRIMARY KEY,
+    Conf_Date DATE,
+    Status VARCHAR(20),
+    Pay_ID INT UNIQUE,
+    FOREIGN KEY (Pay_ID) REFERENCES Payment(Pay_ID)
+);
